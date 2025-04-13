@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Monetized web app with Advertica advertising solutions">
+    <title>Advertica Pro | Smart Advertising Platform</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="//015467.shop/js/responsive.js" as="script">
+    
+    <!-- Modern CSS with variables -->
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --error: #f72585;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --accent: #ff006e;
+            --dark: #f9fafb;
+            --light: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--dark);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .ad-container {
+            margin: 3rem 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .ad-label {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .banner-ad-wrapper {
+            background-color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90px;
+        }
+
+        .content-section {
+            padding: 3rem 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 200px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Lazy loading for ads */
+        .lazy-ad {
+            min-height: 90px;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Advertica Pro</div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#monetization">Monetization</a>
+                    <a href="#contact">Contact</a>
+                    <button class="theme-toggle" id="themeToggle">🌓</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Maximize Your Revenue with Smart Advertising</h1>
+            <p>Advanced monetization solutions powered by Advertica's cutting-edge advertising technology.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                <a href="https://015467.shop/9b90f219f65e5fc78681/dc046072c9/?placementName=default" class="btn">Get Started</a>
+                <a href="#features" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Banner Ad - Above Content -->
+        <div class="ad-container">
+            <span class="ad-label">Advertisement</span>
+            <div class="banner-ad-wrapper">
+                <ins style="width: 728px;height:90px;display:block;margin:0 auto;" 
+                     data-width="728" 
+                     data-height="90" 
+                     class="y436a3fa7e1" 
+                     data-domain="//015467.shop" 
+                     data-affquery="/a2329b19a2be3d332b30/436a3fa7e1/?placementName=default"
+                     id="mainBannerAd">
+                </ins>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="content-section" id="features">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Advanced Advertising Features</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://source.unsplash.com/random/600x400/?technology,1');"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Smartlink Technology</h3>
+                        <p>Our direct smartlinks automatically optimize offers for each visitor, maximizing your conversion rates.</p>
+                        <a href="https://015467.shop/9b90f219f65e5fc78681/dc046072c9/?placementName=default" class="btn" style="margin-top: 1rem; display: inline-block;">Try Smartlink</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://source.unsplash.com/random/600x400/?advertising,1');"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Responsive Banners</h3>
+                        <p>Adaptive banner ads that work perfectly on any device, ensuring optimal visibility and engagement.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://source.unsplash.com/random/600x400/?analytics,1');"></div>
+                    <div class="card-body">
+                        <h3 class="card-title">Advanced Analytics</h3>
+                        <p>Real-time tracking and reporting to help you understand your ad performance and optimize revenue.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monetization Section -->
+        <section class="content-section" id="monetization">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Optimized Monetization</h2>
+            
+            <!-- Lazy-loaded Banner Ad -->
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <div class="banner-ad-wrapper lazy-ad" id="lazyBannerAd">
+                    <span>Loading advertisement...</span>
+                </div>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h3 style="margin-bottom: 1rem;">Maximize Your Earnings</h3>
+                <p style="margin-bottom: 2rem;">Our platform combines multiple ad formats to ensure you get the highest possible revenue from your traffic. The system automatically selects the best performing ad types for each visitor.</p>
+                <a href="https://015467.shop/9b90f219f65e5fc78681/dc046072c9/?placementName=default" class="btn">Start Earning Now</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Advertica Pro</h3>
+                    <p>Advanced advertising solutions for modern publishers.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#monetization">Monetization</a></li>
+                        <li><a href="https://015467.shop/9b90f219f65e5fc78681/dc046072c9/?placementName=default">Smartlink</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:support@advertica.com">Support</a></li>
+                        <li><a href="#">Partnerships</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Advertica Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Ad Scripts -->
+    <!-- Main Banner Ad Script -->
+    <script src="//015467.shop/js/responsive.js" async></script>
+    
+    <!-- Lazy Load Banner Ad -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            
+            // Lazy load the second banner ad when it comes into view
+            const lazyAd = document.getElementById('lazyBannerAd');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Create and inject the ad when visible
+                        const adIns = document.createElement('ins');
+                        adIns.style.cssText = 'width: 728px;height:90px;display:block;margin:0 auto;';
+                        adIns.dataset.width = '728';
+                        adIns.dataset.height = '90';
+                        adIns.className = 'y436a3fa7e1';
+                        adIns.dataset.domain = '//015467.shop';
+                        adIns.dataset.affquery = '/a2329b19a2be3d332b30/436a3fa7e1/?placementName=default';
+                        
+                        lazyAd.innerHTML = '';
+                        lazyAd.appendChild(adIns);
+                        
+                        // Ensure the responsive.js is loaded only once
+                        if (!document.querySelector('script[src="//015467.shop/js/responsive.js"]')) {
+                            const script = document.createElement('script');
+                            script.src = '//015467.shop/js/responsive.js';
+                            script.async = true;
+                            document.body.appendChild(script);
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            observer.observe(lazyAd);
+            
+            // Performance analytics
+            window.addEventListener('load', function() {
+                const perfData = {
+                    dcl: performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart,
+                    load: performance.timing.loadEventEnd - performance.timing.navigationStart,
+                    adLoaded: false
+                };
+                
+                // Track when ads are loaded
+                const checkAdLoad = setInterval(() => {
+                    if (document.querySelector('.y436a3fa7e1 iframe')) {
+                        perfData.adLoaded = true;
+                        perfData.adLoadTime = performance.now();
+                        clearInterval(checkAdLoad);
+                        
+                        // Send to analytics (mock implementation)
+                        console.log('Performance Metrics:', perfData);
+                    }
+                }, 100);
+            });
+        });
+    </script>
+    
+    <!-- PopUp/Under Ad Tag -->
+    <script type="text/javascript" src="//015467.shop/41deeb811142f215b801/07cc3ef85a/?placementName=default" defer></script>
+    
+    <!-- Redirect Ad Tag -->
+    <script type="text/javascript" src="//015467.shop/12ad1e70ed6d933ecb19/d5f7d1fcde/?placementName=tt" defer></script>
+</body>
+</html>
